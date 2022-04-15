@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vicath - Libreria</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="/css/styleHomeAdmin.css">
+    </head>
+<body>
+    <header>
+        <div class="top-header">
+        <div class= "logo">
+            <a href="/homeAdmin" class="contenedorEnlace"><img class="imagen-logo" src="../images/logo.png" alt="Logo de pagina"></a>
+        </div>
+        
+        <div class="iconosHeader">
+        <div class="iconH" id="iconCuenta">
+            <label  for="clickk">
+                <i class="fas fa-user-circle"></i> Administrador
+            </label>
+            <input type="checkbox" class="inputCheck" id="clickk">
+            <div class="login_desplegable">
+                <% if (locals.usuarioHeader) { %>
+                    <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
+                <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil<i class="fas fa-eye" style="user-select: auto;"></i></a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
+                <a href="/logout" class="login_desplegable_close">Cerrar cuenta<i class="fas fa-sign-out-alt"></i></a>
+                <% } else{%>
+    
+                <span class="login_desplegable_header">¡Elija!</span>
+                <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+                <a href="/register" class="login_desplegable_signup">Registrate</a>
+                <% } %> 
+            </div>
+        </div>
+        
+        </div>
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>
+        </div>
+        
+    </header>
+    <main>
+        <div class="accionesAdmin">
+            <section class="formLogin">
+            <div class="saludo">
+                <a href="#">
+                    <i class="fas fa-user-circle"></i> 
+                </a>
+                <h2>¡Bienvenido/a <%= usuarioDatos.first_name%>!</h2>
+            </div>
+            </section>
+            <p class="acciones">Elija que acción desea realizar:</p>
+            <div class="btnGroup">
+                <div class="cont-button">
+                    <a href="https://vicath-libreria-dashboardreact.herokuapp.com/">
+                      <button type="button" class="botonHome">Ver el dashboard</button>  
+                    </a>
+                    </div>
+               <div class="cont-button">
+                <a href="/products/viewProducts">
+                  <button type="button" class="botonHome">Ver listado de productos</button>  
+                </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/products/create">
+                        <button type="button" class="botonHome">Agregar nuevo producto</button>
+                    </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/admin/users">
+                        <button type="button" class="botonHome">Ver tabla usuarios</button>
+                    </a>
+                </div>
+                <div class="cont-button">
+                    <a href="/modocliente">
+                        <button type="button" class="botonHome">Iniciar vista cliente</button>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+    </main>
+    
+</body>
+</html>

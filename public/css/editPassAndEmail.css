@@ -1,0 +1,50 @@
+.errores-general-off.errores-general
+{
+    display: block;
+    opacity: 100;
+    visibility: visible;
+    /* transform: translateY(-357%); */
+}
+.errores-general-off {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #ff9191;
+    width: 300px !important;
+    /* height: 100px; */
+    color: white;
+    /* position: absolute; */
+    /* top: 40%; */
+    /* left: 34%; */
+    padding: 30px;
+    border-radius: 29px;
+    border: 1px solid dotted black;
+    border: 3px dotted black;
+    position: absolute;
+    /* top: -40%; */
+    left: 50%;
+    margin-left: -150px;
+    top: 38%;
+    margin-top: -45px;
+    z-index: 12;
+    transition: all 1s;
+    /* transform: translateY(-357%); */
+}
+
+.errores-lista-general
+{
+    list-style-type: none;
+}
+
+.text-danger
+{
+    color: black;
+    transition: 0.5s ease-in-out all;
+    opacity: 0;
+}
+
+.text-danger.cambiando
+{
+    color: red;
+    opacity: 100;
+}

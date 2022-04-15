@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head", {titulo: "Vicath - Home"}) %> 
+<body>
+    <%- include("./partials/header") %>
+    <div class="slider">
+        <ul>
+            <li><img src="/images/agenda.jpg" alt=""></li>
+            <li><img src="/images/beneficio.jpg" alt=""></li>
+            <li><img src="/images/minnie.jpg" alt=""></li>
+            <li><img src="/images/posca.jpg" alt=""></li>
+        </ul>
+    </div> 
+    <main>
+        <section class="filtrado-contenedor">
+            <div class="filtrado">
+            <h3>Filtrar por:</h3>
+            <form action="/products/filtrado" method="get" class="filtrar-marca">
+                <div>
+                    <h4><label for="marcas"> Marcas <br></label></h4>
+                    <select name="marcas">
+                        <option value="">Selecciona una marca</option>
+                        <% for(marca of marcas){ %>
+                            <option value="<%= marca.name %>"><%= marca.name %></option> 
+                        <% } %>  
+                    </select> 
+                </div>
+                <div>
+                    <h4><label for="colores"> Color <br></label></h4>
+                    <select name="colores">
+                        <option value="">Selecciona un color</option> 
+                        <% for(color of colores){ %>
+                            <option value="<%= color.name %>"><%= color.name %></option> 
+                        <% } %>   
+                    </select>
+                </div>
+                <div>
+                    <h4><label for="precio"> Precio <br></label></h4>
+                    <select name="precio">
+                        <option value="">Selecciona un precio</option> 
+                        <option value="1000">Mayor a $1000</option> 
+                        <option value="2500">Mayor a $2500</option>
+                        <option value="3400">Mayor a $3400</option> 
+                        <option value="5000">Mayor a $5000</option> 
+                    </select>
+                </div>
+                <div>
+                    <button class="enemy" type="submit" >Realizar filtrado</button>
+                </div>
+            </form>
+            </div>
+        </section>
+        <section class="productos">
+            <h3>Productos destacados</h3>
+            <div class="destacados">
+                <% for(producto of destacados){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+
+            <h3>Productos en oferta</h3>
+            <div class="ofertas">
+                <% for(producto of ofertas){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+
+            <h3>Productos en novedades</h3>
+            <div class="novedades">
+                <% for(producto of novedades){ %>
+                    <%- include("./products/article") %>
+                <% } %> 
+            </div>
+        </section>
+    </main>
+    <%- include("./partials/footer") %> 
+    
+</body>
+</html>

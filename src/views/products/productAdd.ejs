@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head", {titulo: "Agregar producto"}) %> 
+    <link rel="stylesheet" href="/css/styleHomeAdmin.css">
+<body>
+    <header>
+        <div class="top-header">
+        <div class= "logo">
+            <a href="/homeAdmin" class="contenedorEnlace"><img class="imagen-logo" src="../images/logo.png" alt="Logo de pagina"></a>
+        </div>
+        
+        <div class="iconosHeader">
+        <div class="iconH" id="iconCuenta">
+            <label  for="clickk">
+                <i class="fas fa-user-circle"></i> Administrador
+            </label>
+            <input type="checkbox" class="inputCheck" id="clickk">
+            <div class="login_desplegable">
+                <% if (locals.usuarioHeader) { %>
+                    <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
+                <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil<i class="fas fa-eye" style="user-select: auto;"></i></a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
+                <a href="/logout" class="login_desplegable_close">Cerrar cuenta<i class="fas fa-sign-out-alt"></i></a>
+                <% } else{%>
+    
+                <span class="login_desplegable_header">¡Elija!</span>
+                <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+                <a href="/register" class="login_desplegable_signup">Registrate</a>
+                <% } %> 
+            </div>
+        </div>
+        
+        </div>
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>
+        </div>
+        
+    </header>
+    <main class="createProduct">
+        <div class="contenedorCrear">
+        <form action="/products/create" method="POST" class="crear" id="formularioProd" enctype="multipart/form-data">
+            <h3>Crear Producto</h3>
+            <div>
+                <h4>Nombre Producto</h4>
+                <input class="dato" type="text" name="name" id="name" value="<%= (locals.oldData) ? oldData.name : null%>" placeholder="Titulo">
+                <div class="text-danger" id="nameError"></div> 
+            </div>
+            <% if (locals.errors && errors.name) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.name.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <h4>Imágenes (puede seleccionar como máximo 4 imágenes)</h4>
+                <input class="imagen" type="file" name="image" id="image"  placeholder="imagen" multiple>
+                <div class="text-danger" id="imageError"></div>   
+            </div>
+            <% if (locals.errors && errors.image) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.image.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <h4>Descripcion</h4>
+                <input class="dato" type="text" name="description" id="description" value="<%= (locals.oldData) ? oldData.description : null %>" placeholder="Descripcion corta"> 
+                <div class="text-danger" id="descriptionError"></div>
+            </div>
+            <% if (locals.errors && errors.description) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.description.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <h4>Descripcion Completa</h4>
+                <textarea class="dato" name="extended_description" cols="20" rows="5" id="extended_description" placeholder="Descripcion"><%= (locals.oldData) ? oldData.extended_description : null %></textarea>
+                <div class="text-danger" id="descriptionExtendedError"></div>
+            </div>
+            <% if (locals.errors && errors.extended_description) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.extended_description.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <h4>Precio</h4>
+                <input class="dato" type="number" name="price" id="price" value="<%= (locals.oldData) ? oldData.price : null %>" placeholder="Precio"> 
+                <div class="text-danger" id="priceError"></div>
+            </div>
+            <% if (locals.errors && errors.price) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.price.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <h4>Descuento</h4>
+                <input class="dato" type="number" name="discount" id="discount" value="<%= (locals.oldData) ? oldData.discount : null %>" placeholder="Descuento(%)"> 
+                <div class="text-danger" id="discountError"></div>
+            </div>
+            <% if (locals.errors && errors.discount) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.discount.msg %></p>
+                </div> 
+            <% } %>
+            <div class="inputs">
+                <div class="inputsData">
+                    <h4>Stock</h4>
+                    <input class="dato" type="number" name="stock" id="stock" value="<%= (locals.oldData) ? oldData.stock : null %>" placeholder="Stock"> 
+                    <div class="text-danger" id="stockError"></div>
+                </div>
+                <% if (locals.errors && errors.stock) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.stock.msg %></p>
+                    </div> 
+                <% } %>
+                <div class="inputsData">
+                    <h4>Stock Minimo</h4>
+                    <input class="dato" type="number" name="stock_min" id="stock_min" value="<%= (locals.oldData) ? oldData.stock_min : null %>" placeholder="Stock minimo"> 
+                    <div class="text-danger" id="stockMinError"></div>
+                </div>
+                <% if (locals.errors && errors.stock_min) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.stock_min.msg %></p>
+                    </div> 
+                <% } %>
+                <div class="inputsData">
+                    <h4>Stock Maximo</h4>
+                    <input class="dato" type="number" name="stock_max" id="stock_max" value="<%= (locals.oldData) ? oldData.stock_max : null %>" placeholder="Stock máximo"> 
+                    <div class="text-danger" id="stockMaxError"></div>
+                </div>
+                <% if (locals.errors && errors.stock_max) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.stock_max.msg %></p>
+                    </div> 
+                <% } %>
+            </div>
+            <div class="inputs">
+                <div class="inputsData">
+                    <h4>Elegir Categoria</h4>
+                    <select name="category" id="category">
+                        <option value=''>Seleccione</option> 
+                        <% for( let category of categories ) { %>
+                            <option value='<%=category.id %>' <%= (locals.oldData && (oldData.category == category.id)) ? "selected" : "" %>><%=category.name%></option> 
+                        <% } %>
+                    </select>
+                    <div class="text-danger" id="categoryError"></div>
+                </div>
+                <% if (locals.errors && errors.category) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.category.msg %></p>
+                    </div> 
+                <% } %>
+                <div class="inputsData">
+                    <h4>Elegir Color</h4>
+                    <select name="color" id="color">
+                        <option value=''>Seleccione</option> 
+                        <% for( let color of colors ) { %>
+                            
+                            <option value="<%=color.id %>" <%= (locals.oldData && (oldData.color == color.id)) ? "selected" : "" %>><%=color.name%></option> 
+                            
+                        <% } %>
+                    </select>
+                    <div class="text-danger" id="colorError"></div>
+                </div>
+                <% if (locals.errors && errors.color) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.color.msg %></p>
+                    </div> 
+                <% } %>
+                <div class="inputsData">
+                    <h4>Elegir Marca</h4>
+                    <select name="brand" id="brand">
+                        <option value=''>Seleccione</option> 
+                        <% for( let brand of brands ) { %>
+                            <option value="<%=brand.id %>" <%= (locals.oldData && (oldData.brand == brand.id)) ? "selected" : "" %>><%=brand.name%></option> 
+                        <% } %>
+                    </select>
+                    <div class="text-danger" id="brandError"></div>
+                </div>
+                <% if (locals.errors && errors.brand) { %>
+                    <div class="errorValidacion">
+                        <p><%= errors.brand.msg %></p>
+                    </div> 
+                <% } %>
+            </div>
+            <div class = "botones">
+                <button class= "botonCrear" type="submit"> Crear </button>
+                <a href="/products/viewProducts"><button class= "botonCancelar" type="button"> Cancelar </button></a>
+            </div>
+        </form>
+        <div class="text-danger" id="formError"></div> 
+        </div>
+
+    </main>
+    <%- include('../partials/footer') %> 
+    <script type="text/javascript" src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <script src="/js/validacionProductos.js"></script>
+</body>
+</html>

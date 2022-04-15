@@ -1,0 +1,92 @@
+<header>
+    <div class="top-header">
+    <div class= "logo">
+        <a href="/"><img class="imagen-logo" src="/images/logo.png" alt="Logo de pagina"></a>
+    </div>
+    <div class="form-busqueda">
+        <form action="/products/busqueda" method="get">
+            <div class="contenedorSelect">
+                <select class="selectBusqueda" name="category">
+                    <option value=''>Seleccione</option> 
+                    <% for( let category of categories ) { %>
+                        <option value='<%=category.id %>'><%=category.name%></option> 
+                    <% } %>
+                </select>
+            </div>
+            <input type="text" placeholder="Buscar productos" name="busqueda">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="iconosHeader">
+    <div class="iconH" id="carritoS">
+        <a href="/products/cart">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
+    <div class="iconH" id="iconCuenta">
+        <label  for="clickk">
+            <i class="fas fa-user-circle" ></i> 
+        </label>
+        <input type="checkbox" class="inputCheck" id="clickk">
+        <div class="login_desplegable">
+            <% if (locals.usuarioHeader) { %>
+                <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.nombre %> </span>
+            <a href="/profile" class="login_desplegable_perfil">Ver perfil</a><hr>
+            <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil</a><hr>
+            <a style="background-color: rgb(245, 94, 94);" href="/changeEmailAndPass/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Cambiar e-mail y contraseña</a><hr>
+            <a href="/logout" class="login_desplegable_close">Cerrar cuenta</a>
+            <% } else{%>
+
+            <span class="login_desplegable_header">¡Elija!</span>
+            <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+            <a href="/register" class="login_desplegable_signup">Registrate</a>
+            <% } %> 
+        </div>
+    </div>
+    <div class="iconH" id="iconCuenta">
+        <button class="switch" id="switch">
+            <span><i class="fas fa-sun"></i></span>
+            <span><i class="fas fa-moon"></i></span>
+        </button>
+    </div>
+    </div>
+    <div class="burger-menu">
+        <i class="fa fa-bars burger"></i>
+    </div>
+    
+    </div>
+    
+    <div class="menuDeOpciones">
+        <ul>
+            <li><a class="enlacesMenu" href="/products/novedades">Novedades</a></li>
+            <% for( let category of categories ) { %>
+                <li><a class="enlacesMenu" href="/products/categorias/<%=category.id %>"><%=category.name%></a></li>
+            <% } %>
+            <li><a class="enlacesMenu" href="/products/all">Ver todos</a></li>
+            <% if (locals.usuarioHeader) { %>
+            <li><a href="/profile" class="enlacesMenu">Ver perfil</a></li>
+            <li><a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="enlacesMenu">Editar perfil</a></li>
+            <li><a href="/changeEmailAndPass/<%= locals.datosUsuarioGlobal.id %>" class="enlacesMenu">Cambiar e-mail y contraseña</a></li>
+            <li><a href="/logout" class="enlacesMenu">Cerrar cuenta</a></li>
+            <% } else{%>
+            
+            <li><a href="/login" class="enlacesMenu">Iniciar sesión</a></li>
+            <li><a href="/register" class="enlacesMenu">Registrate</a></li>
+            <% } %> 
+        </ul>
+    </div>
+
+    <div class="button-header">
+    <nav>
+        <ul>
+            <li><a href="/products/novedades">Novedades</a></li>
+            <% for( let category of categories ) { %>
+                <li><a href="/products/categorias/<%=category.id %>"><%=category.name%></a></li>
+            <% } %>
+            <li><a href="/products/all">Ver todos</a></li>
+        </ul>
+    </nav>
+</div>
+
+</header>
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/stylesHeader-Footer.css">
+    <link rel="stylesheet" href="/css/stylesRegister.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+        <div class= "logo">
+            <a href="/" class="contenedorEnlace"><img class="imagen-logo" src="../../images/logo.png" alt="Logo de pagina"></a>
+        </div>
+        
+        <div class="iconosHeader">
+        <div class="iconH" id="iconCuenta">
+            <label  for="clickk">
+                <i class="fas fa-user-circle"></i> Administrador
+            </label>
+            <input type="checkbox" class="inputCheck" id="clickk">
+            <div class="login_desplegable">
+                <% if (locals.usuarioHeader) { %>
+                    <span class="login_desplegable_header">¡Hola! <%= locals.datosUsuarioGlobal.first_name %> </span>
+                <a href="/profileAdmin" class="login_desplegable_perfil">Ver perfil<i class="fas fa-eye" style="user-select: auto;"></i></a><hr>
+                <a href="/edit/<%= locals.datosUsuarioGlobal.id %>" class="login_desplegable_edit">Editar perfil<i class="fas fa-shield-alt" style="user-select: auto;"></i></a><hr>
+                <a href="/logout" class="login_desplegable_close">Cerrar cuenta<i class="fas fa-sign-out-alt"></i></a>
+                <% } else{%>
+    
+                <span class="login_desplegable_header">¡Elija!</span>
+                <a href="/login" class="login_desplegable_login">Iniciar sesión</a><hr>
+                <a href="/register" class="login_desplegable_signup">Registrate</a>
+                <% } %> 
+            </div>
+        </div>
+        
+        </div>
+        <div class="burger-menu">
+            <i class="fa fa-bars burger"></i>
+        </div>
+        </div>
+        
+    </header>
+    <main class="register">
+        <div>
+        <form action="/admin/editUser/<%= usuarioDatos.id %>?_method=PUT" method="post" class="continuar" enctype="multipart/form-data">
+            <h3>Bienvenido! - Modifica a tu usuario :]</h3>
+            <h4> <i class="fas fa-user-circle"></i> Datos Personales<br></h4>
+            <div >
+                <input type="file" name="avatar" id="avatar" value= "<%= locals.usuarioDatos? usuarioDatos.avatar:null %>" accept=".jpg,.png" > 
+            </div>
+            <% if (locals.errors && errors.avatar) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.avatar.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato" type="text" name="nombre" id="nombre" minlength="2" value= "<%= locals.usuarioDatos? usuarioDatos.first_name:null %>" placeholder="Nombre" > 
+                <div class="text-danger" id="nameError"></div>
+            </div>
+            <% if (locals.errors && errors.nombre) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.nombre.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato"type="text" name="apellido" id="apellido" minlength="2" value= "<%= locals.usuarioDatos? usuarioDatos.last_name:null %>" placeholder="Apellido" >  
+                <div class="text-danger" id="lastnameError"></div>
+            </div>
+            <% if (locals.errors && errors.apellido) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.apellido.msg %></p>
+                </div> 
+            <% } %>
+            <div>
+                <input class="dato" type="text" name="telefono" id="telefono" minlength="10" value="<%= locals.usuarioDatos? usuarioDatos.phone_number:null %>" placeholder="Telefono movil" > 
+                <div class="text-danger" id="telError"></div>
+            </div>
+            <% if (locals.errors && errors.telefono) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.telefono.msg %></p>
+                </div> 
+            <% } %>
+            <div >
+                <input class="dato" type="email" name="email" id="email" value= "<%= locals.usuarioDatos? usuarioDatos.email:null %>" placeholder="Correo Electronico" >
+                <div class="text-danger" id="emailError"></div>
+            </div>
+            <% if (locals.errors && errors.email) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.email.msg %></p>
+                </div> 
+            <% } %>
+            <!-- <h4> <i class="fas fa-lock"></i> Contraseña<br></h4>
+            <div > 
+                <input class="dato" type="password" name="contrasenia" minlength="8" id="contrasenia" placeholder="Contraseña" >
+                <div class="text-danger" id="contraseniaError"></div>
+            </div>
+            <div >
+                <input class="dato" type="password" name="contrasenia2" minlength="8" id="contrasenia2" placeholder="Confirmar Contraseña" >
+                <div class="text-danger" id="contraseniaConfirmedError"></div>
+            </div> 
+            <% if (locals.errors && errors.contrasenia) { %>
+                <div class="errorValidacion">
+                    <p><%= errors.contrasenia.msg %></p>
+                </div> 
+            <% } %> -->
+
+            <div >
+                <h4>Elegi el rol</h4>
+                    <select name="rol" id="category">
+                        <option value=''>Seleccione</option> 
+                        <% for( let rol of roles ) { %>
+                            <option value='<%=rol.id %>' <%= (locals.usuarioDatos && (usuarioDatos.rol_id == rol.id)) ? "selected" : "" %>><%=rol.name%></option> 
+                        <% } %>
+                    </select>
+            </div> 
+
+            <div class = "botones">
+                <button class= "botonRegistro" type="submit"> Enviar </button>
+                <button class= "botonRegistro" type="reset"> Cancelar </button>
+            </div>
+            <div class="text-danger" id="formError"></div>
+        </form>
+        </div>
+        
+       
+    </main>
+    <%- include('../partials/footer') %>
+    <script type="text/javascript" src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <script src="/js/validacionRegister.js"></script>
+</body>
+</html>
